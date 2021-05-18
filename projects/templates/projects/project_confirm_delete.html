@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Actualizar proyecto{% endblock %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    <br>
+    <div class="card mx-auto bg-dark" style="width: 18rem;">
+        <p class="text-center" style="padding: 10px">Are you sure you want to delete "{{ object }}"?</p>
+        <div class="row mx-auto" style="padding-bottom: 10px">
+            <input  class="btn btn-primary" type="submit" value="Confirm">
+            <a class="btn btn-danger text-light" href="{% url 'projects:projects' %}"> Cancelar </a>
+        </div>
+    </div>
+    <br>
+</form>
+{% endblock %}

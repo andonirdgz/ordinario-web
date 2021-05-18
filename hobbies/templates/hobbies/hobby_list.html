@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+{% block title %} Hobbies {% endblock %}
+{% block content %} 
+{% load static %} 
+
+
+<section class="page-section cta">
+  <div class="container">
+      <div class="jumbotron my-4 project-background bg-dark">
+    <h1 class="display-4 text-center">Hobbies</h1>
+    <p class="lead blockquote text-center">Esta es una lista de mis hobbies y actividades favoritas que realizo en mi tiempo libre</p>
+    {% if request.user.is_staff %}
+				<p class="text-center">
+					<a class="btn btn-primary" href="{% url 'hobbies:create' %}">Crear nuevo hobby</a>
+				</p>
+		{% endif %}
+  </div>
+
+<div class="row row-cols-1 row-cols-md-2">
+ {% for hobby in hobby_list|dictsort:'id' reversed %}
+    
+      <div class="col-md-6 col-sm-12 mb-4">
+        <div class="card h-100 bg-dark">
+          {% if hobby.video %}
+            <div class="embed-responsive embed-responsive-16by9">
+                <video class='card-img-top' controls>
+                <source src="{{hobby.video.url}}" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
+            </div>
+          {% else %}
+          <img src="{{hobby.image.url}}" class="card-img-top" alt="...">
+          {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{hobby.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{hobby.subtitle}}</h6>
+                <p class="card-text">{{hobby.description}}</p>
+                <small class="text-muted">{{hobby.created|date:"d/m/Y"}}</small>
+            </div>
+
+            {% if request.user.is_staff %}
+                <a class="btn btn-info" href="{% url 'hobbies:update' hobby.id %}"><i class="fas fa-edit"></i> Editar Hobby</a>
+            {% endif %}
+        </div>
+    </div>
+    
+ {% endfor %} 
+  </div>
+</section>
+{% endblock %}

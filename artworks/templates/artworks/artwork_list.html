@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% block title %} Artworks {% endblock %}
+{% block content %} 
+{% load static %} 
+
+
+<section class="page-section cta">
+  <div class="container">
+      <div class="jumbotron my-4 project-background bg-dark">
+    <h1 class="display-4 text-center">Artworks</h1>
+    <p class="lead blockquote text-center">Estos son algunos de mis trabajos de arte digital que estan en venta</p>
+    {% if request.user.is_staff %}
+				<p class="text-center">
+					<a class="btn btn-primary" href="{% url 'artworks:create' %}">Crear nueva obra de arte</a>
+				</p>
+		{% endif %}
+  </div>
+
+<div class="row row-cols-1 row-cols-md-2">
+ {% for artwork in artwork_list|dictsort:'id' reversed %}
+    
+      <div class="col-md-6 col-sm-12 mb-4">
+        <div class="card h-100 bg-dark">
+          <img src="{{artwork.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{artwork.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Precio {{artwork.price}} BTC</h6>
+                <p class="card-text">{{artwork.description}}</p>
+                <small class="text-muted">{{artwork.created|date:"d/m/Y"}}</small>
+            </div>
+            <a class="btn btn-primary" onclick="agregaCarrito({{artwork.id}})" role="button">Agregar al carrito </a>
+
+            {% if request.user.is_staff %}
+                <a class="btn btn-info" href="{% url 'artworks:update' artwork.id %}"><i class="fas fa-edit"></i> Editar obra</a>
+            {% endif %}
+        </div>
+    </div>
+    
+ {% endfor %} 
+  </div>
+</section>
+{% endblock %}
+
+{% block contentJS %}
+  <script>
+
+    function agregaCarrito(id) {
+      if (cart[id] != undefined) {
+        cart[id] += 1;
+      }
+      else {
+        cart[id] = 1;
+      }
+      // Se coloca en el localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+      show_badge_cart();
+    }
+  </script>
+
+{% endblock %}

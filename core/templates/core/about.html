@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %} 
+{% block title %} Acerca de... {% endblock %}
+{% block content %} 
+{% load static %}
+<!-- Contenido Principal -->
+<div class="margen_top container">
+  <div class="row">
+    <div class="col-lg-5 col-md-4">
+      <img class="img-fluid avatar" src="{% static 'core/img/avatar.jpeg' %}" alt="" />
+    </div>
+    <div class="col-lg-7 col-md-8">
+      <h2 class="section-heading">Andoni Rodríguez</h2>
+      <p>
+        Soy de Mérida, me gustan las hamburguesas, tengo 2 hermanos, uno menor y una
+        mayor, Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quas
+        veritatis itaque ratione quod inventore cum laborum mollitia asperiores possimus
+        cumque, facere officia porro, sequi ipsam accusantium repellat.
+      </p>
+      <p>
+        Tengo 21 años, ya me quiero graduar, Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Deserunt ducimus corrupti blanditiis est ut perferendis, in
+        iure. Nemo cum laboriosam ex et consectetur esse repellendus incidunt numquam
+        repudiandae. Dolor, amet! Ipsa ducimus harum atque quidem quasi exercitationem
+        pariatur facilis consequuntur, maiores a voluptas placeat tenetur ipsum.
+      </p>
+      <p>
+        Mis pasatiemtos son salir a pasear en bicicleta, jugar videojuegos, salir con mis
+        amigos, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui eligendi
+        natus odio culpa id atque, aut sed laboriosam ipsa possimus error ullam
+        perspiciatis debitis molestiae. Tenetur illum aliquid earum fugiat.
+      </p>
+    </div>
+  </div>
+</div>
+{%endblock %}

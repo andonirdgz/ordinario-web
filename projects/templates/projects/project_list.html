@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %} 
+{% block title %} Proyectos {% endblock %} 
+{% block content %} 
+{% load static %}
+
+<!-- Contenido Principal -->
+<div class="margen_top container">
+	<div class="row">
+		<div class="col d-sm-block rounded project-background" id="project-background">
+			{% if request.user.is_staff %}
+				<p class="text-right">
+					<a class="btn btn-primary" href="{% url 'projects:create' %}">Crear nuevo proyecto</a>
+				</p>
+			{% endif %}
+			<div class="container py-3">
+				{% for project in project_list|dictsort:'id' reversed %}
+				<!-- Proyecto -->
+				<div class="row pt-4">
+					<div class="col-lg-3 col-md-4 offset-lg-1">
+						<img class="img-fluid mb-3 rounded" src="{{ project.image.url}}" alt="" />
+					</div>
+					<div class="col-lg-7 col-md-8">
+						<h2 class="section-heading title">{{ project.title }}</h2>
+						<p>{{project.description|striptags|safe|truncatechars:"200"}}</p>
+						<p><a href="{% url 'projects:project' project.id project.title|slugify %}">Leer más</a></p>
+						
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

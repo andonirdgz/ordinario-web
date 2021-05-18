@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %} 
+{% load static %} 
+{% block title %}{{project.title}}{% endblock %} 
+{% block content %}
+<main role="main">
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-9 mx-auto text-light bg-dark rounded">
+                    <br>
+                    <h2 class="section-heading mb-4 text-center">{{project.title}}</h2>
+                    <img class="mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{project.image.url}}" alt="" />
+                    <div style="padding: 20px">
+                        {{project.description|safe}}
+                    </div>
+                    {% if project.link%}
+                            <br>
+							<p class="text-center">
+                                <a  target="_blank" href="{{ project.link }}">Ir al proyecto</a>
+                            </p>
+					{% endif %}
+                    {% if request.user.is_staff %}
+                        <p class="text-right">
+                            <a class="btn btn-info" href="{% url 'projects:update' project.id %}"><i class="fas fa-edit"></i> Editar Proyecto</a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<br>
+{% endblock %}
